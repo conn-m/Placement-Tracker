@@ -34,7 +34,6 @@ namespace PlacementTracker.Controllers
             return View(activities);
         }
 
-
         // GET: PlacementActivities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
