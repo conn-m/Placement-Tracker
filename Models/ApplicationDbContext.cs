@@ -1,14 +1,15 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace PlacementTracker.Models
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<PlacementActivity> PlacementActivities { get; set; }
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+        
+        public DbSet<PlacementActivity> PlacementActivities { get; set; }
     }
 }

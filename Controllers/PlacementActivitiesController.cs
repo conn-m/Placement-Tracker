@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using PlacementTracker.Models;
 
 namespace PlacementTracker.Controllers
 {
+    [Authorize]
     public class PlacementActivitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,6 +27,7 @@ namespace PlacementTracker.Controllers
         }
 
         // GET: PlacementActivities/Report
+        [Authorize]
         public IActionResult Report()
         {
             var activities = _context.PlacementActivities.ToList();
