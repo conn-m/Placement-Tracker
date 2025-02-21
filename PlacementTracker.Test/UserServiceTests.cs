@@ -16,14 +16,14 @@ namespace PlacementTracker.Test
         public UserServiceTests()
         {
             // configure the data context options to use sqlite for testing
-            var options = DatabaseContext.OptionsBuilder                            
-                            .UseSqlite("Filename=test.db")
-                            //.LogTo(Console.WriteLine)
-                            .Options;
+            //var options = DatabaseContext.OptionsBuilder                            
+            //                .UseSqlite("Filename=test.db")
+            //                //.LogTo(Console.WriteLine)
+            //                .Options;
 
             // create service with new context
-            service = new UserServiceDb(new DatabaseContext(options));
-            service.Initialise();
+            //service = new UserServiceDb(new DatabaseContext(options));
+            //service.Initialise();
         }
 
         [Fact]

@@ -11,7 +11,7 @@ namespace PlacementTracker.Data.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public DateTime Dob { get; set; } = DateTime.Now;
+        //public DateTime Dob { get; set; } = DateTime.Now;
 
         // User role within application
         public Role Role { get; set; } 

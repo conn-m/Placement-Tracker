@@ -64,7 +64,7 @@ public class UserController : BaseController
 
         Alert("Successfully Logged in", AlertType.info);
 
-        return Redirect("/");
+        return Redirect("/Home/Index");
     }
 
     // HTTP GET - Display Register page
@@ -230,11 +230,11 @@ public class UserController : BaseController
 
     // HTTP POST - Logout action
     [Authorize]
-    [HttpPost]
+    //[HttpPost]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction(nameof(Login));
+        return RedirectToAction("Login");
     }
 
 

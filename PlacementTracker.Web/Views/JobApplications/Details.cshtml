@@ -1,0 +1,91 @@
+﻿@model IList<PlacementTracker.Data.Entities.JobApplication>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="header">
+	<h1 class="header-title">
+		Job Application Details
+	</h1>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="dashboard-default.html">Job Application Details</a></li>
+			<li class="breadcrumb-item"><a href="#">All Job Application Details</a></li>
+		</ol>
+	</nav>
+</div>
+
+
+<div class="row">
+	<div class="col-12 d-flex">
+		<div class="card flex-fill">
+			<div class="card-header">
+				<div class="card-actions float-end">
+					<a href="#" class="me-1">
+						<i class="align-middle" data-feather="refresh-cw"></i>
+					</a>
+					<div class="d-inline-block dropdown show">
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+							<i class="align-middle" data-feather="more-vertical"></i>
+						</a>
+
+						<div class="dropdown-menu dropdown-menu-end">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</div>
+				</div>
+				<h5 class="card-title mb-0">Job Applications Details</h5>
+			</div>
+
+			<table id="datatables-dashboard-projects" class="table table-striped my-0">
+				<thead>
+					<tr>
+						<th class="d-none d-xl-table-cell">Company</th>
+						<th class="d-none d-xl-table-cell">Position</th>
+						<th class="d-none d-xl-table-cell">Date</th>
+						<th>Activity</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.PlacementOrg)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Position)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.ActivityDate)
+							</td>
+							<td>
+								@if (item.Name == "Received Job Offer")
+								{
+									<span class="badge bg-success">@item.Name</span>
+								}
+								else if (item.Name == "Attended Interview")
+								{
+									<span class="badge bg-warning">@item.Name</span>
+								}
+								else
+								{
+									<span class="badge bg-secondary">@item.Name</span>
+								}
+
+							</td>
+							<td>
+								<a asp-controller="JobApplications" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>

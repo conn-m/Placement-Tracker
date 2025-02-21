@@ -18,7 +18,7 @@ namespace PlacementTracker.Data.Services
 
         public void Initialise()
         {
-           ctx.Initialise(); 
+           //ctx.Initialise(); 
         }
 
         // ------------------ User Related Operations ------------------------

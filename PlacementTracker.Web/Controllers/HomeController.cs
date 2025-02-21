@@ -5,23 +5,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PlacementTracker.Data.Services;
 using PlacementTracker.Web.Models;
+using PlacementTracker.Web.Models.User;
 
 namespace PlacementTracker.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IJobApplicationService _jobAppService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IJobApplicationService jobAppService)
         {
-            _logger = logger;
+            _jobAppService = jobAppService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            int id = User.GetSignedInUserId();
+
+            StudDashboardViewModel vm = new StudDashboardViewModel();
+            vm.JobApplications = _jobAppService.GetJobAppsByUserId(User.GetSignedInUserId()).Where(x => x.Name== "Applied For Job").ToList();
+            vm.CountActivities = 1; // await _context.Activity.CountAsync();
+            vm.CountAppsSubmitted = 2; // await _context.Activity.Where(x => x.Name == "Applied For Job").CountAsync();
+            vm.CountInterviews = 3; // await _context.Activity.Where(x => x.Name == "Attended Interview").CountAsync();
+            vm.CountOffers = 4; // await _context.Activity.Where(x => x.Name == "Received Job Offer").CountAsync();
+
+            return View(vm);
         }
 
         [Authorize]

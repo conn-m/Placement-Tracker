@@ -2,6 +2,7 @@ using PlacementTracker.Web;
 using PlacementTracker.Data.Services;
 using PlacementTracker.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,14 +14,16 @@ builder.Services.AddCookieAuthentication();
 
 builder.Services.AddDbContext<DatabaseContext>( options => {
     // Configure connection string for selected database in appsettings.json
-    options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"));   
+    //options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"));   
     //options.UseMySql(builder.Configuration.GetConnectionString("MySql"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MySql")));
     //options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+    
 });  
 
 // Add Application Services to DI   
 builder.Services.AddTransient<IUserService,UserServiceDb>();
+builder.Services.AddTransient<IJobApplicationService, JobApplicationServiceDb>();
 builder.Services.AddTransient<IMailService,SmtpMailService>();
 
 var app = builder.Build();
@@ -36,7 +39,8 @@ else
 {
     // seed users in development mode - using service provider to get UserService from DI
     using var scope = app.Services.CreateScope();
-    Seeder.Seed(scope.ServiceProvider.GetService<IUserService>());
+    Seeder.Seed(scope.ServiceProvider.GetService<IUserService>(), scope.ServiceProvider.GetService<IJobApplicationService>());
+    //Seeder.Seed(scope.ServiceProvider.GetService<IJobApplicationService>());
 }
 
 app.UseHttpsRedirection();
@@ -51,5 +55,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <!-- Used in development to create fake seed data -->
@@ -8,8 +8,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="9.0.1" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <!-- Select SQL provider required and comment out others -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
     <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" /> -->
     <!-- <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.2.efcore.9.0.0" />    -->
     <!-- <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />  -->

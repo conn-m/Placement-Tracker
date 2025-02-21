@@ -11,15 +11,19 @@ namespace PlacementTracker.Data.Repositories
     // We define DbSet properties for each table in the database
     public class DatabaseContext : DbContext
     {
-         // authentication store
-        public DbSet<User> Users { get; set; }
-        public DbSet<ForgotPassword> ForgotPasswords { get; set; }
-        public DbSet<JobApplication> JobApplications { get; set; }
-        
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
-        
+
+        // authentication store
+        public DbSet<User> Users { get; set; }
+        public DbSet<ForgotPassword> ForgotPasswords { get; set; }
+        public DbSet<JobApplication> JobApplications { get; set; }
+
+
+
+
+
         // Configure the context with logging - remove in production
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {
@@ -27,7 +31,7 @@ namespace PlacementTracker.Data.Repositories
         //     optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging();               
         // }
 
-        public static DbContextOptionsBuilder<DatabaseContext> OptionsBuilder => new ();
+        //public static DbContextOptionsBuilder<DatabaseContext> OptionsBuilder => new ();
 
         // Convenience method to recreate the database thus ensuring the new database takes 
         // account of any changes to Models or DatabaseContext. ONLY to be used in development
